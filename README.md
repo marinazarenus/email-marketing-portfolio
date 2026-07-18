@@ -32,12 +32,3 @@ The project covers campaign strategy, lifecycle automation, testing and measurem
 
 Open `index.html` in a browser. The site is entirely static and requires no installation or build command.
 
-## Deploy to GitHub Pages
-
-1. Add the project files to the root of a GitHub repository.
-2. Commit and push the files to the repository's default branch.
-3. In the repository settings, open **Pages**.
-4. Choose **Deploy from a branch**.
-5. Select the default branch and the repository root (`/`), then save.
-
-Because all site links and assets use relative paths, the site works when GitHub Pages hosts it inside a repository subdirectory.
