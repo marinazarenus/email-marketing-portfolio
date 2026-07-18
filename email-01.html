@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>Try Junie on one clear task</title>
+  <script>
+    (() => {
+      const parameters = new URLSearchParams(window.location.search);
+      const theme = parameters.get('theme');
+      if (theme === 'light' || theme === 'dark') document.documentElement.dataset.previewTheme = theme;
+      if (parameters.get('view') === 'expanded') document.documentElement.dataset.previewView = 'expanded';
+    })();
+  </script>
+  <style>
+    html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+    body { background: #f1f0eb; font-family: Arial, Helvetica, sans-serif; }
+    table { border-collapse: collapse; border-spacing: 0; }
+    td { mso-line-height-rule: exactly; }
+    a { color: inherit; }
+    .email-container { width: 100%; max-width: 640px; }
+    html[data-preview-view="expanded"] .email-container { max-width: 760px !important; }
+    .stack-column { vertical-align: top; }
+    .mobile-transition { display: none; }
+
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .email-shell-cell { padding: 12px 8px !important; }
+      .mobile-padding { padding-right: 24px !important; padding-left: 24px !important; }
+      .hero-padding { padding: 40px 24px !important; }
+      .stack-column { display: block !important; width: 100% !important; }
+      .criteria-column,
+      .comparison-column { padding-right: 0 !important; padding-left: 0 !important; }
+      .criteria-column + .criteria-column,
+      .comparison-column + .comparison-column { padding-top: 16px !important; }
+      .mobile-transition { display: block !important; margin: 0 0 14px !important; color: #6f4a7e !important; font-size: 20px !important; line-height: 24px !important; font-weight: 700 !important; }
+      .email-heading { font-size: 36px !important; line-height: 40px !important; }
+      .email-section-heading { font-size: 27px !important; line-height: 33px !important; }
+      .footer-link { display: block !important; padding: 6px 0 !important; }
+      .footer-separator { display: none !important; }
+    }
+
+    /* Production-oriented dark mode. Client support and colour transformations vary. */
+    @media (prefers-color-scheme: dark) {
+      html, body, .email-body, .email-shell { background: #121116 !important; }
+      .email-surface, .email-header, .email-task-section, .email-control { background: #1a181f !important; }
+      .email-hero, .email-closing { background: #2c3219 !important; }
+      .email-comparison { background: #24202a !important; }
+      .email-card { background: #2b2730 !important; }
+      .email-prompt-list { background: #24202a !important; }
+      .email-delegated-task { background: #2b2730 !important; }
+      .email-footer { background: #121116 !important; }
+      .email-heading, .email-section-heading, .email-card-heading, .email-brand, .email-emphasis { color: #f5f2f6 !important; }
+      .email-copy, .email-muted, .email-brand-line, .email-footer-copy { color: #c8c1cb !important; }
+      .email-eyebrow, .email-label, .email-process, .email-criteria-number, .email-criteria-title, .mobile-transition { color: #d8c2e1 !important; }
+      .email-rule, .email-header, .email-card, .email-footer, .email-criteria-row { border-color: #403a45 !important; }
+      .email-prompt-list { background: transparent !important; }
+      .email-delegated-task { border-color: #9b77ad !important; }
+      .email-cta { background: #7b5a93 !important; }
+      .email-cta-link { color: #ffffff !important; }
+      .email-footer-links, .email-footer-link { color: #d8c2e1 !important; }
+    }
+
+    /* Outlook app dark-mode hooks where supported. */
+    [data-ogsc] body, [data-ogsc] .email-body, [data-ogsc] .email-shell { background: #121116 !important; }
+    [data-ogsc] .email-surface, [data-ogsc] .email-header, [data-ogsc] .email-task-section, [data-ogsc] .email-control { background: #1a181f !important; }
+    [data-ogsc] .email-hero, [data-ogsc] .email-closing { background: #2c3219 !important; }
+    [data-ogsc] .email-comparison { background: #24202a !important; }
+    [data-ogsc] .email-card, [data-ogsc] .email-delegated-task { background: #2b2730 !important; }
+    [data-ogsc] .email-prompt-list { background: #24202a !important; }
+    [data-ogsc] .email-footer { background: #121116 !important; }
+    [data-ogsc] .email-heading, [data-ogsc] .email-section-heading, [data-ogsc] .email-card-heading, [data-ogsc] .email-brand, [data-ogsc] .email-emphasis { color: #f5f2f6 !important; }
+    [data-ogsc] .email-copy, [data-ogsc] .email-muted, [data-ogsc] .email-brand-line, [data-ogsc] .email-footer-copy { color: #c8c1cb !important; }
+    [data-ogsc] .email-eyebrow, [data-ogsc] .email-label, [data-ogsc] .email-process, [data-ogsc] .email-criteria-number, [data-ogsc] .email-criteria-title { color: #d8c2e1 !important; }
+    [data-ogsc] .email-rule, [data-ogsc] .email-header, [data-ogsc] .email-card, [data-ogsc] .email-footer, [data-ogsc] .email-criteria-row { border-color: #403a45 !important; }
+    [data-ogsc] .email-prompt-list { background: transparent !important; }
+    [data-ogsc] .email-delegated-task { border-color: #9b77ad !important; }
+    [data-ogsc] .email-cta { background: #7b5a93 !important; }
+    [data-ogsc] .email-cta-link { color: #ffffff !important; }
+    [data-ogsc] .email-footer-links, [data-ogsc] .email-footer-link { color: #d8c2e1 !important; }
+
+    /* Portfolio preview overrides. The parent page sets this attribute on the email document. */
+    html[data-preview-theme="light"],
+    html[data-preview-theme="light"] body,
+    html[data-preview-theme="light"] .email-body,
+    html[data-preview-theme="light"] .email-shell { background: #f1f0eb !important; }
+    html[data-preview-theme="light"] .email-surface,
+    html[data-preview-theme="light"] .email-header,
+    html[data-preview-theme="light"] .email-task-section,
+    html[data-preview-theme="light"] .email-control { background: #fbfaf7 !important; }
+    html[data-preview-theme="light"] .email-hero { background: #eff8c2 !important; }
+    html[data-preview-theme="light"] .email-comparison { background: #e9e1ed !important; }
+    html[data-preview-theme="light"] .email-closing { background: #eff8c2 !important; }
+    html[data-preview-theme="light"] .email-card { background: #f1f0eb !important; }
+    html[data-preview-theme="light"] .email-prompt-list { background: transparent !important; }
+    html[data-preview-theme="light"] .email-delegated-task { background: #ffffff !important; }
+    html[data-preview-theme="light"] .email-footer { background: #f1f0eb !important; }
+    html[data-preview-theme="light"] .email-heading,
+    html[data-preview-theme="light"] .email-section-heading,
+    html[data-preview-theme="light"] .email-card-heading,
+    html[data-preview-theme="light"] .email-brand,
+    html[data-preview-theme="light"] .email-emphasis { color: #151318 !important; }
+    html[data-preview-theme="light"] .email-copy { color: #37333a !important; }
+    html[data-preview-theme="light"] .email-muted,
+    html[data-preview-theme="light"] .email-brand-line,
+    html[data-preview-theme="light"] .email-footer-copy { color: #5c5660 !important; }
+    html[data-preview-theme="light"] .email-eyebrow,
+    html[data-preview-theme="light"] .email-label,
+    html[data-preview-theme="light"] .email-criteria-number,
+    html[data-preview-theme="light"] .email-criteria-title,
+    html[data-preview-theme="light"] .email-process,
+    html[data-preview-theme="light"] .mobile-transition { color: #4b2a59 !important; }
+    html[data-preview-theme="light"] .email-rule,
+    html[data-preview-theme="light"] .email-header,
+    html[data-preview-theme="light"] .email-card,
+    html[data-preview-theme="light"] .email-criteria-row,
+    html[data-preview-theme="light"] .email-footer { border-color: #d5d1d8 !important; }
+    html[data-preview-theme="light"] .email-delegated-task { border-color: #6f4a7e !important; }
+    html[data-preview-theme="light"] .email-cta { background: #6f4a7e !important; }
+    html[data-preview-theme="light"] .email-cta-link { color: #ffffff !important; }
+    html[data-preview-theme="light"] .email-footer-links,
+    html[data-preview-theme="light"] .email-footer-link { color: #6f4a7e !important; }
+
+    html[data-preview-theme="dark"],
+    html[data-preview-theme="dark"] body,
+    html[data-preview-theme="dark"] .email-body,
+    html[data-preview-theme="dark"] .email-shell,
+    body[data-preview-theme="dark"],
+    body[data-preview-theme="dark"] .email-shell { background: #121116 !important; }
+    html[data-preview-theme="dark"] .email-surface,
+    html[data-preview-theme="dark"] .email-header,
+    html[data-preview-theme="dark"] .email-task-section,
+    html[data-preview-theme="dark"] .email-control { background: #1a181f !important; }
+    html[data-preview-theme="dark"] .email-hero,
+    html[data-preview-theme="dark"] .email-closing { background: #2c3219 !important; }
+    html[data-preview-theme="dark"] .email-comparison { background: #24202a !important; }
+    html[data-preview-theme="dark"] .email-card { background: #2b2730 !important; }
+    html[data-preview-theme="dark"] .email-prompt-list { background: #24202a !important; }
+    html[data-preview-theme="dark"] .email-delegated-task { background: #2b2730 !important; }
+    html[data-preview-theme="dark"] .email-footer { background: #121116 !important; }
+    html[data-preview-theme="dark"] .email-heading,
+    html[data-preview-theme="dark"] .email-section-heading,
+    html[data-preview-theme="dark"] .email-card-heading,
+    html[data-preview-theme="dark"] .email-brand,
+    html[data-preview-theme="dark"] .email-emphasis { color: #f5f2f6 !important; }
+    html[data-preview-theme="dark"] .email-copy,
+    html[data-preview-theme="dark"] .email-muted,
+    html[data-preview-theme="dark"] .email-brand-line,
+    html[data-preview-theme="dark"] .email-footer-copy { color: #c8c1cb !important; }
+    html[data-preview-theme="dark"] .email-eyebrow,
+    html[data-preview-theme="dark"] .email-label,
+    html[data-preview-theme="dark"] .email-criteria-number,
+    html[data-preview-theme="dark"] .email-criteria-title,
+    html[data-preview-theme="dark"] .email-process,
+    html[data-preview-theme="dark"] .mobile-transition { color: #d8c2e1 !important; }
+    html[data-preview-theme="dark"] .email-rule,
+    html[data-preview-theme="dark"] .email-header,
+    html[data-preview-theme="dark"] .email-card,
+    html[data-preview-theme="dark"] .email-criteria-row,
+    html[data-preview-theme="dark"] .email-footer { border-color: #403a45 !important; }
+    html[data-preview-theme="dark"] .email-prompt-list { background: transparent !important; }
+    html[data-preview-theme="dark"] .email-delegated-task { border-color: #9b77ad !important; }
+    html[data-preview-theme="dark"] .email-cta { background: #7b5a93 !important; }
+    html[data-preview-theme="dark"] .email-cta-link { color: #ffffff !important; }
+    html[data-preview-theme="dark"] .email-footer-links,
+    html[data-preview-theme="dark"] .email-footer-link { color: #d8c2e1 !important; }
+  </style>
+</head>
+<body class="email-body">
+  <div style="display:none;font-size:1px;color:#f1f0eb;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">
+    Watch it plan the steps, update your project, run the tests, and show you exactly what changed.
+    &#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+  </div>
+
+  <table class="email-shell" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;background:#f1f0eb;">
+    <tr>
+      <td class="email-shell-cell" align="center" style="padding:24px 12px;">
+        <table class="email-container email-surface" role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:640px;background:#fbfaf7;">
+          <tr>
+            <td class="email-header mobile-padding email-rule" style="padding:24px 40px;background:#fbfaf7;border-bottom:1px solid #d5d1d8;">
+              <p class="email-brand" style="margin:0;font-size:30px;line-height:34px;font-weight:700;letter-spacing:-0.6px;color:#151318;">Junie</p>
+              <p class="email-brand-line" style="margin:4px 0 0;font-size:14px;line-height:20px;color:#5c5660;">AI coding agent by JetBrains</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="email-hero email-section hero-padding" style="padding:52px 48px;background:#eff8c2;">
+              <p class="email-eyebrow" style="margin:0 0 18px;font-size:12px;line-height:16px;font-weight:700;letter-spacing:1.2px;color:#4b2a59;">JUNIE · AI CODING AGENT</p>
+              <h1 class="email-heading" style="margin:0;font-size:44px;line-height:48px;letter-spacing:-1.5px;color:#151318;font-weight:700;">Give Junie one task to run, start to finish.</h1>
+              <p class="email-copy" style="margin:22px 0 0;font-size:17px;line-height:27px;color:#37333a;">You set the outcome and the boundaries. Junie plans the change and works through the steps. You review the result and keep what works.</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px;">
+                <tr>
+                  <td class="email-cta" align="center" bgcolor="#6F4A7E" style="border-radius:8px;background:#6f4a7e;">
+                    <!-- Production CTA URL would be supplied internally. -->
+                    <a class="email-cta-link" href="#" style="display:inline-block;padding:15px 22px;font-size:16px;line-height:20px;font-weight:700;color:#ffffff;text-decoration:none;">Start a task with Junie</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="email-section email-task-section mobile-padding" style="padding:44px 40px;background:#fbfaf7;">
+              <h2 class="email-section-heading" style="margin:0;font-size:28px;line-height:34px;letter-spacing:-0.6px;color:#151318;">Choose work you can judge.</h2>
+              <p class="email-copy" style="margin:10px 0 22px;font-size:16px;line-height:25px;color:#37333a;">You don't need a perfect prompt or a big refactor. Start with a task that has three things:</p>
+              <table class="email-criteria-list" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="email-criteria-number" width="46" valign="top" style="width:46px;padding:0 14px 18px 0;color:#6f4a7e;font-size:27px;line-height:30px;font-weight:700;">1</td>
+                  <td valign="top" style="padding:0 0 18px;">
+                    <p class="email-criteria-title" style="margin:0;color:#6f4a7e;font-size:17px;line-height:23px;font-weight:700;">A clear outcome</p>
+                    <p class="email-copy" style="margin:5px 0 0;font-size:16px;line-height:24px;color:#37333a;">What should be different once Junie's done?</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="email-criteria-number email-criteria-row" width="46" valign="top" style="width:46px;padding:18px 14px 18px 0;border-top:1px solid #d5d1d8;color:#6f4a7e;font-size:27px;line-height:30px;font-weight:700;">2</td>
+                  <td class="email-criteria-row" valign="top" style="padding:18px 0;border-top:1px solid #d5d1d8;">
+                    <p class="email-criteria-title" style="margin:0;color:#6f4a7e;font-size:17px;line-height:23px;font-weight:700;">Firm boundaries</p>
+                    <p class="email-copy" style="margin:5px 0 0;font-size:16px;line-height:24px;color:#37333a;">What should it change and what should it leave alone?</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="email-criteria-number email-criteria-row" width="46" valign="top" style="width:46px;padding:18px 14px 0 0;border-top:1px solid #d5d1d8;color:#6f4a7e;font-size:27px;line-height:30px;font-weight:700;">3</td>
+                  <td class="email-criteria-row" valign="top" style="padding:18px 0 0;border-top:1px solid #d5d1d8;">
+                    <p class="email-criteria-title" style="margin:0;color:#6f4a7e;font-size:17px;line-height:23px;font-weight:700;">A way to verify it</p>
+                    <p class="email-copy" style="margin:5px 0 0;font-size:16px;line-height:24px;color:#37333a;">Can you confirm the result with a test, a build, or a quick review?</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="email-section email-comparison mobile-padding" style="padding:42px 40px;background:#e9e1ed;">
+              <h2 class="email-section-heading" style="margin:0 0 24px;font-size:28px;line-height:34px;letter-spacing:-0.6px;color:#151318;">From a chain of prompts to one scoped task</h2>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="stack-column comparison-column" width="39%" style="width:39%;padding-right:10px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr><td class="email-card email-prompt-list email-rule" style="padding:20px;background:transparent;border:1px solid #8c7c92;">
+                        <p class="email-label" style="margin:0 0 14px;font-size:12px;line-height:16px;font-weight:700;letter-spacing:1px;color:#4b2a59;">SEPARATE REQUESTS</p>
+                        <p class="email-copy" style="margin:0;font-size:16px;line-height:25px;color:#37333a;">— Find where email validation happens.</p>
+                        <p class="email-copy" style="margin:10px 0 0;font-size:16px;line-height:25px;color:#37333a;">— Add a check for empty addresses.</p>
+                        <p class="email-copy" style="margin:10px 0 0;font-size:16px;line-height:25px;color:#37333a;">— Update the relevant tests.</p>
+                        <p class="email-copy" style="margin:10px 0 0;font-size:16px;line-height:25px;color:#37333a;">— Run them and tell me what breaks.</p>
+                      </td></tr>
+                    </table>
+                  </td>
+                  <td class="stack-column comparison-column" width="61%" style="width:61%;padding-left:10px;">
+                    <p class="mobile-transition">↓ One connected task</p>
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr><td class="email-card email-delegated-task" style="padding:18px;background:#ffffff;border:2px solid #6f4a7e;">
+                        <p class="email-label" style="margin:0 0 14px;font-size:12px;line-height:16px;font-weight:700;letter-spacing:1px;color:#4b2a59;">ONE TASK FOR JUNIE</p>
+                        <p class="email-copy" style="margin:0;font-size:16px;line-height:25px;color:#37333a;">Inspect the registration flow, add empty-email validation, update and run the relevant tests, leave unrelated code alone, and summarize what changed.</p>
+                      </td></tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <p class="email-copy" style="margin:22px 0 0;font-size:16px;line-height:25px;color:#37333a;">A clear outcome, firm boundaries, and a verification step turn four prompts into one task Junie can own.</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="email-section email-control mobile-padding" style="padding:44px 40px;background:#fbfaf7;">
+              <h2 class="email-section-heading" style="margin:0;font-size:28px;line-height:34px;letter-spacing:-0.6px;color:#151318;">Let Junie work through the steps. Keep the final say.</h2>
+              <p class="email-copy" style="margin:16px 0 0;font-size:16px;line-height:25px;color:#37333a;">Ask for a plan first when you want a checkpoint. Then follow the progress, inspect the changed files, and keep or roll back anything you like. Nothing lands without your sign-off.</p>
+              <p class="email-process" style="margin:18px 0 0;font-size:13px;line-height:20px;font-weight:700;letter-spacing:0.8px;color:#4b2a59;text-align:center;white-space:nowrap;">PLAN <span aria-hidden="true" style="display:inline-flex;width:24px;height:16px;margin:0 0.45em;align-items:center;justify-content:center;vertical-align:middle;"><svg width="24" height="10" viewBox="0 0 24 10" role="presentation" style="display:block;"><path d="M1 5H21M17 1L21 5L17 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> RUN <span aria-hidden="true" style="display:inline-flex;width:24px;height:16px;margin:0 0.45em;align-items:center;justify-content:center;vertical-align:middle;"><svg width="24" height="10" viewBox="0 0 24 10" role="presentation" style="display:block;"><path d="M1 5H21M17 1L21 5L17 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> REVIEW <span aria-hidden="true" style="display:inline-flex;width:24px;height:16px;margin:0 0.45em;align-items:center;justify-content:center;vertical-align:middle;"><svg width="24" height="10" viewBox="0 0 24 10" role="presentation" style="display:block;"><path d="M1 5H21M17 1L21 5L17 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> REFINE</p>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="email-section email-closing mobile-padding" style="padding:44px 40px;background:#eff8c2;">
+              <h2 class="email-section-heading" style="margin:0;font-size:28px;line-height:34px;letter-spacing:-0.6px;color:#151318;">See where Junie fits in your workflow.</h2>
+              <p class="email-copy" style="margin:16px 0 0;font-size:16px;line-height:25px;color:#37333a;">A good first result makes the next task easier to spot and easier to hand off. Start with one task. Let the result earn the next one </p>
+ 
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:26px;">
+                <tr>
+                  <td class="email-cta" align="center" bgcolor="#6F4A7E" style="border-radius:8px;background:#6f4a7e;">
+                    <!-- Production CTA URL would be supplied internally. -->
+                    <a class="email-cta-link" href="#" style="display:inline-block;padding:15px 22px;font-size:16px;line-height:20px;font-weight:700;color:#ffffff;text-decoration:none;">Start a task with Junie</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="email-footer mobile-padding email-rule" style="padding:30px 40px;background:#f1f0eb;border-top:1px solid #d5d1d8;">
+              <p class="email-footer-copy" style="margin:0;font-size:14px;line-height:21px;color:#5c5660;">You're receiving this email because you use JetBrains AI.</p>
+              <p class="email-footer-links" style="margin:14px 0 0;font-size:14px;line-height:22px;color:#6f4a7e;">
+                <!-- Production preference, unsubscribe, and privacy URLs would be supplied internally. -->
+                <a class="footer-link email-footer-link" href="#" style="color:#6f4a7e;text-decoration:underline;">Manage email preferences</a>
+                <span class="footer-separator" aria-hidden="true">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+                <a class="footer-link email-footer-link" href="#" style="color:#6f4a7e;text-decoration:underline;">Unsubscribe</a>
+                <span class="footer-separator" aria-hidden="true">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+                <a class="footer-link email-footer-link" href="#" style="color:#6f4a7e;text-decoration:underline;">Privacy</a>
+              </p>
+              <p class="email-footer-copy" style="margin:18px 0 0;font-size:14px;line-height:20px;font-weight:700;color:#5c5660;">JetBrains</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Testing and measurement plan for an independent Junie activation campaign concept.">
+  <title>Testing and measurement — Junie activation campaign</title>
+  <link rel="stylesheet" href="styles.css?v=campaign-email-1">
+  <script src="script.js?v=campaign-email-1" defer></script>
+</head>
+<body class="internal-page testing-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="header-inner">
+      <a class="identity" href="index.html" aria-label="Marina Natsarenus, home">Marina Natsarenus</a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+        <span class="menu-label">Menu</span>
+        <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
+      </button>
+
+      <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+        <ul>
+          <li><a href="index.html">Campaign</a></li>
+          <li><a href="strategy.html">Strategy</a></li>
+          <li><a href="lifecycle.html">Lifecycle</a></li>
+          <li><a href="testing.html" aria-current="page">Testing</a></li>
+        </ul>
+        <div class="contact-menu" data-contact-menu>
+          <button class="header-action" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="contact-popover">Contact</button>
+          <div class="contact-popover" id="contact-popover" hidden>
+            <a href="mailto:m.natsarenus@gmail.com">m.natsarenus@gmail.com</a>
+            <a href="tel:+420720107607">+420 720 107 607</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="testing-main" id="main-content">
+    <header class="case-study-header">
+      <div class="case-study-header__band">
+        <div class="case-study-header__inner">
+          <h1>Testing and measurement</h1>
+        </div>
+      </div>
+      <div class="case-study-header__subtitle">
+        <div class="case-study-header__inner">
+          <p>How the campaign tests one subject-line decision, evaluates it by first-task completion, and separates message performance from incremental campaign impact.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="testing-page-container testing-page-content">
+      <div class="testing-disclosures">
+        <details class="testing-disclosure" open>
+          <summary>
+            <span class="testing-summary-copy">
+              <span class="testing-summary-title">Test design</span>
+              <span class="testing-summary-description">Defines the hypothesis, the two subject-line variants, and what stays fixed.</span>
+            </span>
+            <span class="testing-summary-arrow" aria-hidden="true"></span>
+          </summary>
+          <div class="testing-disclosure__content">
+            <p class="testing-hypothesis-copy"><strong>Hypothesis: a task-led subject line will drive a higher seven-day completion rate than a capability-led one.</strong>
+            Only the subject line changes; audience, body, preview text, CTA, send time, and destination stay fixed.</p>
+
+            <div class="testing-variants">
+              <article class="testing-variant testing-variant--a">
+                <p class="testing-variant-name"><span>Variant</span><strong>A</strong><span class="testing-variant-descriptor">Task-led</span></p>
+                <p class="testing-subject">Subject: <strong>Try Junie on one clear task</strong></p>
+                <p class="testing-variant-explanation"><em>Frames the first step as a single bounded, manageable action.</em></p>
+              </article>
+
+              <article class="testing-variant testing-variant--b">
+                <p class="testing-variant-name"><span>Variant</span><strong>B</strong><span class="testing-variant-descriptor">Capability-led</span></p>
+                <p class="testing-subject">Subject: <strong>See Junie handle a real project task</strong></p>
+                <p class="testing-variant-explanation"><em>Leads with what Junie can do: plan, change, test, and report on a real task.</em></p>
+              </article>
+            </div>
+          </div>
+        </details>
+
+        <details class="testing-disclosure">
+          <summary>
+            <span class="testing-summary-copy">
+              <span class="testing-summary-title">How the result is evaluated</span>
+              <span class="testing-summary-description">Shows which outcome selects the winner and which signals help explain it.</span>
+            </span>
+            <span class="testing-summary-arrow" aria-hidden="true"></span>
+          </summary>
+          <div class="testing-disclosure__content">
+            <ul class="testing-evaluation-list">
+              <li>
+                <p class="testing-evaluation-main"><strong class="testing-evaluation-label">Primary metric:</strong> <strong class="testing-evaluation-value">first Junie task completed within seven days.</strong></p>
+                <p>This determines the winning variant.</p>
+              </li>
+              <li>
+                <p class="testing-evaluation-main"><strong class="testing-evaluation-label">Diagnostic path:</strong> <strong class="testing-evaluation-value">qualified CTA click → Junie opened → task submitted → task completed.</strong></p>
+                <p>This shows where the two variants begin to diverge.</p>
+              </li>
+              <li>
+                <p class="testing-evaluation-main"><strong class="testing-evaluation-label">Guardrails:</strong> <strong class="testing-evaluation-value">unsubscribes · spam complaints · delivery failures.</strong></p>
+                <p>Open rate adds context but does not determine the winner.</p>
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="testing-disclosure">
+          <summary>
+            <span class="testing-summary-copy">
+              <span class="testing-summary-title">Decision rule</span>
+              <span class="testing-summary-description">Sets the condition for rollout or another test.</span>
+            </span>
+            <span class="testing-summary-arrow" aria-hidden="true"></span>
+          </summary>
+          <div class="testing-disclosure__content">
+            <div class="testing-rule-inset">
+              <div class="testing-rule-row">
+                <p>Reliable, meaningful lift in seven-day completion with stable guardrails</p>
+                <span class="testing-rule-arrow" aria-hidden="true"></span>
+                <p>roll out the stronger variant as the new control.</p>
+              </div>
+              <div class="testing-rule-row">
+                <p>Inconclusive result</p>
+                <span class="testing-rule-arrow" aria-hidden="true"></span>
+                <p>keep the current control and test a sharper messaging contrast.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="testing-disclosure">
+          <summary>
+            <span class="testing-summary-copy">
+              <span class="testing-summary-title">Incremental impact</span>
+              <span class="testing-summary-description">Separates message performance from the effect of running the campaign at all.</span>
+            </span>
+            <span class="testing-summary-arrow" aria-hidden="true"></span>
+          </summary>
+          <div class="testing-disclosure__content">
+            <div class="testing-impact-flow">
+              <p>The A/B test identifies the stronger subject line among users who receive the campaign.</p>
+              <p>A randomly assigned no-send holdout estimates whether the campaign lifts first-task completion beyond what would have happened through normal product use.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <p class="testing-methodology-note"><em>Sample size, test duration, decision thresholds, eligibility rules, and event definitions would be set from the eligible audience and the current activation baseline.</em></p>
+
+      <nav class="testing-page-nav" aria-label="Case study pages">
+        <a href="lifecycle.html#automation">Automation</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Marina Natsarenus · Independent portfolio project · 2026</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An independent three-email activation concept for JetBrains Junie.">
+  <title>Junie Activation Campaign — Marina Natsarenus</title>
+  <link rel="stylesheet" href="styles.css?v=campaign-email-1">
+  <script src="script.js?v=campaign-email-1" defer></script>
+</head>
+<body class="home-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="header-inner">
+      <a class="identity" href="index.html" aria-label="Marina Natsarenus, home">Marina Natsarenus</a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+        <span class="menu-label">Menu</span>
+        <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
+      </button>
+
+      <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+        <ul>
+          <li><a href="index.html" aria-current="page">Campaign</a></li>
+          <li><a href="strategy.html">Strategy</a></li>
+          <li><a href="lifecycle.html">Lifecycle</a></li>
+          <li><a href="testing.html">Testing</a></li>
+        </ul>
+        <div class="contact-menu" data-contact-menu>
+          <button class="header-action" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="contact-popover">Contact</button>
+          <div class="contact-popover" id="contact-popover" hidden>
+            <a href="mailto:m.natsarenus@gmail.com">m.natsarenus@gmail.com</a>
+            <a href="tel:+420720107607">+420 720 107 607</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1 id="hero-title">Junie activation campaign</h1>
+          <p class="hero-category">Email marketing · Portfolio case study</p>
+          <p class="hero-lede">A three-email concept that moves active JetBrains AI users from AI assistance to their first well-scoped task with Junie.</p>
+          <p class="disclosure">An independent concept built from public JetBrains materials — not commissioned by or affiliated with JetBrains.</p>
+          <div class="hero-actions" aria-label="Campaign actions">
+            <a class="button button-primary" href="#featured-email-preview">View featured email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-scope" aria-label="Campaign summary">
+      <div class="project-scope-inner">
+        <dl class="project-scope-fact">
+          <dt>Audience</dt>
+          <dd>Active JetBrains AI users who haven't yet completed a task with Junie.</dd>
+        </dl>
+        <dl class="project-scope-fact">
+          <dt>Activation goal</dt>
+          <dd>First completed Junie task within seven days of entry.</dd>
+        </dl>
+        <dl class="project-scope-fact">
+          <dt>My role</dt>
+          <dd>Research, strategy, copy, lifecycle logic, email design, and HTML/CSS.</dd>
+        </dl>
+        <div class="project-scope-action">
+          <a class="button project-scope-button" href="strategy.html">View campaign strategy</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="email-section" id="email" aria-labelledby="email-title">
+      <div class="email-section-inner">
+        <header class="email-section-header">
+          <h2 id="email-title">Featured email</h2>
+          <p>Email 1 of 3 <span aria-hidden="true">·</span> Primary action: Start a task with Junie</p>
+        </header>
+
+        <div class="email-feature-layout">
+          <div class="email-preview-column">
+            <div class="email-preview-panel" id="featured-email-preview" data-preview-instance="main">
+              <div class="inbox-preview" aria-label="Inbox preview">
+                <dl>
+                  <div><dt>From</dt><dd>JetBrains AI</dd></div>
+                  <div><dt>Subject</dt><dd>Try Junie on one clear task</dd></div>
+                  <div><dt>Preview</dt><dd>Watch it plan the steps, update your project, run the tests, and show you exactly what changed.</dd></div>
+                </dl>
+              </div>
+
+              <div class="preview-toolbar" aria-label="Email preview controls">
+                <div class="preview-control-group" aria-label="Viewport">
+                  <span>Viewport</span>
+                  <div class="segmented-control">
+                    <button type="button" data-preview-control="viewport" data-preview-value="desktop" aria-pressed="true">Desktop</button>
+                    <button type="button" data-preview-control="viewport" data-preview-value="mobile" aria-pressed="false">Mobile</button>
+                  </div>
+                </div>
+                <div class="preview-control-group" aria-label="Appearance">
+                  <span>Appearance</span>
+                  <div class="segmented-control">
+                    <button type="button" data-preview-control="appearance" data-preview-value="light" aria-pressed="true">Light</button>
+                    <button type="button" data-preview-control="appearance" data-preview-value="dark" aria-pressed="false">Dark</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="email-frame-stage" data-preview-viewport="desktop">
+                <div class="email-frame">
+                  <iframe src="email-01.html?theme=light" title="Email 1: Try Junie on one clear task" data-email-frame></iframe>
+                </div>
+              </div>
+
+              <button class="expand-email" type="button" data-open-email-dialog>Expand full email</button>
+            </div>
+          </div>
+
+          <details class="prototype-note">
+            <summary>Prototype and rendering notes</summary>
+            <div class="prototype-note__body">
+              <p>The preview demonstrates desktop, mobile, light, and dark portfolio states. Production rendering, client compatibility, audience rules, subject-line performance, and the final CTA destination would require validation; dark-mode behavior also varies by email client.</p>
+            </div>
+          </details>
+
+          <nav class="home-project-nav" aria-labelledby="project-nav-title">
+            <h3 id="project-nav-title">Explore the project</h3>
+            <p class="home-project-intro">Get more detail on the reasoning and decisions behind the campaign.</p>
+            <ul class="home-project-links">
+              <li><a href="strategy.html">Campaign strategy</a></li>
+              <li><a href="lifecycle.html">Lifecycle automation</a></li>
+              <li><a href="testing.html">Testing and measurement</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Marina Natsarenus · Independent portfolio project · 2026</p>
+  </footer>
+
+  <dialog class="email-dialog" aria-labelledby="email-dialog-title" data-email-dialog>
+    <div class="email-dialog-inner">
+      <header class="email-dialog-header">
+        <div>
+          <p class="section-kicker">Expanded preview</p>
+          <h2 id="email-dialog-title">Email 1 · Junie product introduction and activation</h2>
+        </div>
+        <button class="dialog-close" type="button" data-close-email-dialog>Close</button>
+      </header>
+
+      <div class="preview-toolbar" aria-label="Expanded email preview controls">
+        <div class="preview-control-group" aria-label="Viewport">
+          <span>Viewport</span>
+          <div class="segmented-control">
+            <button type="button" data-preview-control="viewport" data-preview-value="desktop" aria-pressed="true">Desktop</button>
+            <button type="button" data-preview-control="viewport" data-preview-value="mobile" aria-pressed="false">Mobile</button>
+          </div>
+        </div>
+        <div class="preview-control-group" aria-label="Appearance">
+          <span>Appearance</span>
+          <div class="segmented-control">
+            <button type="button" data-preview-control="appearance" data-preview-value="light" aria-pressed="true">Light</button>
+            <button type="button" data-preview-control="appearance" data-preview-value="dark" aria-pressed="false">Dark</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="email-frame-stage dialog-frame-stage" data-preview-viewport="desktop">
+        <div class="email-frame">
+          <iframe src="email-01.html?theme=light&amp;view=expanded" title="Expanded Email 1: Try Junie on one clear task" data-email-frame data-preview-expanded="true"></iframe>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>
