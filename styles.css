@@ -67,7 +67,7 @@ h1, h2 { font-weight: 560; letter-spacing: -0.055em; line-height: 0.94; }
 /* Header */
 .site-header { position: sticky; z-index: 20; top: 0; border-bottom: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent); background: color-mix(in srgb, var(--color-page) 92%, transparent); backdrop-filter: blur(14px); }
 .header-inner { display: flex; width: min(100% - clamp(2rem, 6vw, 6rem), var(--content-width)); min-height: var(--header-height); margin-inline: auto; align-items: center; justify-content: space-between; }
-.identity { font-size: var(--size-sm); font-weight: 600; letter-spacing: -0.01em; }
+.identity { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
 .site-nav { display: flex; align-items: center; gap: clamp(1.5rem, 3vw, 3rem); }
 .site-nav ul { display: flex; gap: clamp(1rem, 2vw, 2rem); }
 .site-nav a { position: relative; font-size: var(--size-sm); white-space: nowrap; }
@@ -858,9 +858,7 @@ body.dialog-open { overflow: hidden; }
 .home-page .prototype-note__body p { max-width: 76ch; color: var(--home-text-secondary); font-family: var(--font-sans); font-size: 0.875rem; font-weight: 400; line-height: 1.55; }
 
 .home-page .home-project-nav { width: min(100%, 47.5rem); margin: clamp(3.5rem, 4vw, 4.5rem) auto 0; }
-.home-page .identity { font-size: 1.125rem; }
 .home-page .home-project-nav h3 { color: var(--home-text-primary); font-size: clamp(1.5rem, 2vw, 1.6875rem); font-weight: 680; line-height: 1.2; text-align: center; }
-.home-page .home-project-intro { max-width: 42rem; margin: 0.75rem auto 0; color: var(--home-text-primary); font-size: 1rem; font-weight: 400; line-height: 1.55; text-align: center; }
 .home-page .home-project-links { display: grid; width: fit-content; max-width: 100%; margin: 1.5rem auto 0; padding-left: 1.25rem; list-style: disc; gap: 1rem; }
 .home-page .home-project-links li { display: list-item; }
 .home-page .home-project-links li::marker { color: #514b55; font-size: 0.8em; }
